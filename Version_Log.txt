@@ -1,0 +1,14 @@
+Version_0_1 - Upload realizado por Yukiharu em 08/09/2019:
+  Adicionadas as funções cria_programa(), create_program_dir(),
+    carrega_processos(), add_pronto(), imprime_lista().
+
+Version_0_2 - Upload realizado por Yukiharu em 10/09/2019:
+  - Foi adicionado as funções inserir() e separar(), removidas as
+    funções add_pronto() e carrega_processos(). Esta foi mesclada à
+    cria_programa() e aquela foi substituída pelas funções adicionadas. Todas as
+    funções estão funcionando como deveriam.
+  - Modificação da função imprime_lista(), agora ela mostra a prioridade.
+  - A opção 2 do menu na main() agora realiza a impressão das listas FIFO e de
+    prioridade.
+  - Planos futuros: remover a função create_program_dir() e renomear as
+    variáveis para melhor compreensão e uniformidade.
