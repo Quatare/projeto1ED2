@@ -12,3 +12,9 @@ Version_0_2 - Upload realizado por Yukiharu em 10/09/2019:
     prioridade.
   - Planos futuros: remover a função create_program_dir() e renomear as
     variáveis para melhor compreensão e uniformidade.
+    
+Version_0_3_1 - Upload realizado por MateusMMontagnoli em 11/09/2019:
+  - Foi adicionado fazer_interrupcao(), InserirDisp(), retornar_processoDisp(), remover(), ver_interrupcao e finalizar_processoDisp().
+  - Versão incompleta, finalizar_processoDisp() não esta sendo utilizada e as passagem pela CPU não ocorre, apenas a parte da interrupção       está funcionando(Não está automatico).
+  - A impressão da lista de dispositivos foi adicionada na opção 2 do menu.
+  - Falta: Alternância, passagem pela CPU e automatização das Interrupções.
