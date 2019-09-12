@@ -18,3 +18,7 @@ Version_0_3_1 - Upload realizado por MateusMMontagnoli em 11/09/2019:
   - Versão incompleta, finalizar_processoDisp() não esta sendo utilizada e as passagem pela CPU não ocorre, apenas a parte da interrupção       está funcionando(Não está automatico).
   - A impressão da lista de dispositivos foi adicionada na opção 2 do menu.
   - Falta: Alternância, passagem pela CPU e automatização das Interrupções.
+ 
+Version_0_3_2 - Upload realizado por fgfrank em 11/09/2019:
+  -Foi adicionado as funções alterna_pronto(), executa_prior() e executa_fifo().
+  -Falta: automatização da geração de interrupções com o decorrer da execução de processos e revisão das políticas de escalonamento.
