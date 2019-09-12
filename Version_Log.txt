@@ -20,5 +20,9 @@ Version_0_3_1 - Upload realizado por MateusMMontagnoli em 11/09/2019:
   - Falta: Alternância, passagem pela CPU e automatização das Interrupções.
  
 Version_0_3_2 - Upload realizado por fgfrank em 11/09/2019:
-  -Foi adicionado as funções alterna_pronto(), executa_prior() e executa_fifo().
-  -Falta: automatização da geração de interrupções com o decorrer da execução de processos e revisão das políticas de escalonamento.
+  - Foi adicionado as funções alterna_pronto(), executa_prior() e executa_fifo().
+  - Falta: automatização da geração de interrupções com o decorrer da execução de processos e revisão das políticas de escalonamento.
+
+Version_0_3_3 - Upload realizado por fgfrank e MateusMMontagnoli em 12/09/2019:
+  - Foi juntada às funções executa_prior() e executa_filo, as funções de interrupções. Com isso a automatização da interrupções e execuções     de processos foi feita.
+  - Falta: Mudar nomes de variáveis e funções, melhoramento de interface e deixa-la bem intuitiva.
