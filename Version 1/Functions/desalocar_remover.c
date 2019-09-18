@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "testando.h"
+#include "testando.h" // Inclui a struct Memoria
 
 
 
@@ -46,7 +46,7 @@ int main() {
         imprime(bloco_mem);
         break;
       case 3:
-      	printf("Isto � apenas um teste, digite o id da memoria a ser desalocada:");
+      	printf("Isto é apenas um teste, digite o id da memoria a ser desalocada:");
       	scanf("%d",&teste);
       	desalocaMem(&bloco_mem,teste);
       default:
@@ -61,20 +61,20 @@ void alocaMem(Memoria **bloco, int *process_id) {
   Memoria *aux = *bloco;
   Memoria *melhor_local = NULL;
   Memoria *novo = malloc(sizeof(Memoria));
-  // Atribuições
+  // AtribuiÃ§Ãµes
   novo->ocupado = 1;
   novo->espaco = rand() % 63 + 1;
   novo->process_id = *process_id;
-  // Obtenção do menor bloco de memória suficiente - Best Fit
+  // ObtenÃ§Ã£o do menor bloco de memÃ³ria suficiente - Best Fit
   melhor_local = best_fit(bloco, novo->espaco);
 
   if (melhor_local != NULL) { // Existe o melhor local
-    // Atualização da quantidade de memória livre
+    // AtualizaÃ§Ã£o da quantidade de memÃ³ria livre
     melhor_local->espaco -= novo->espaco;
-    // Inserção do novo processo alocado na memória
+    // InserÃ§Ã£o do novo processo alocado na memÃ³ria
     novo->prox = melhor_local;
     novo->ant = melhor_local->ant;
-    if (melhor_local->ant == NULL) { // Primeiro endereço
+    if (melhor_local->ant == NULL) { // Primeiro endereÃ§o
       *bloco = novo;
     } else {
       (melhor_local->ant)->prox = novo;
@@ -82,7 +82,7 @@ void alocaMem(Memoria **bloco, int *process_id) {
     //printf("Teste1\n");
     melhor_local->ant = novo;
     (*process_id)++;
-  } else { // Não há endereços válidos
+  } else { // NÃ£o hÃ¡ endereÃ§os vÃ¡lidos
     puts("Erro: memoria insuficiente ou muito fragmentada");
   }
 }
@@ -91,8 +91,8 @@ Memoria* best_fit(Memoria **bloco, int mem_solicitada) {
   Memoria *aux = *bloco;
   Memoria *melhor_posicao = NULL;
   int espaco_do_menor_bloco_possivel = 0;
-  int flag = 0; // Marca a existência de pelo menos um espaço válido
-  // Busca pelo primeiro endereço válido para a alocação
+  int flag = 0; // Marca a existÃªncia de pelo menos um espaÃ§o vÃ¡lido
+  // Busca pelo primeiro endereÃ§o vÃ¡lido para a alocaÃ§Ã£o
   while (aux != NULL && flag == 0) {
     if (aux->ocupado == 0 && aux->espaco >= mem_solicitada) {
       melhor_posicao = aux;
@@ -101,11 +101,11 @@ Memoria* best_fit(Memoria **bloco, int mem_solicitada) {
     }
     aux = aux->prox;
   }
-  // Verifica se existe pelo menos um local válido
-  if (flag == 0) { // Não existe memória disponível
-    return NULL; // Melhor posição não existe, pois falta memória
+  // Verifica se existe pelo menos um local vÃ¡lido
+  if (flag == 0) { // NÃ£o existe memÃ³ria disponÃ­vel
+    return NULL; // Melhor posiÃ§Ã£o nÃ£o existe, pois falta memÃ³ria
   } else {
-    // Verifica se é realmente o melhor local
+    // Verifica se Ã© realmente o melhor local
     while (aux != NULL) {
       if (aux->ocupado == 0 && aux->espaco >= mem_solicitada) {
         if (aux->espaco < espaco_do_menor_bloco_possivel) {
@@ -122,8 +122,8 @@ Memoria* best_fit(Memoria **bloco, int mem_solicitada) {
 void remover(Memoria **bloco, Memoria **bloco_inicio){
 	Memoria *aux = (*bloco);
 	printf("%d -- %d -- %d",aux->espaco , aux->ocupado,aux->process_id);
-	if(aux != NULL){
-		if(aux == (*bloco_inicio)){
+	if(aux != NULL){ // Se existir o bloco de memoria
+		if(aux == (*bloco_inicio)){ // Talvez não precisa desse.
 			(*bloco_inicio) = aux->prox;
 			if((*bloco_inicio) == NULL)
 				(*bloco_inicio)->ant = NULL;
@@ -131,14 +131,14 @@ void remover(Memoria **bloco, Memoria **bloco_inicio){
 			aux = (*bloco_inicio);
 		}
 		else{
-			if(aux->prox == NULL){
+			if(aux->prox == NULL){ // O Bloco a ser Removido e o ultimo
 				Memoria *aux2 = aux;
 				aux = aux->ant;
 				aux->prox = NULL;
 				free(aux2);
 				aux2 = NULL;
 			}
-			else{
+			else{ // O bloco a ser Removido esta no meio
 				aux->ant->prox = aux->prox;
 				aux->prox->ant = aux->ant;
 				Memoria *aux2 = aux->prox;
@@ -155,64 +155,64 @@ void desalocaMem(Memoria **bloco_mem, int process_id){
 	Memoria *aux_prox = (*bloco_mem)->prox;
 	Memoria *aux = (*bloco_mem);
 	Memoria *novo = malloc(sizeof(Memoria));
-	while(aux->process_id != process_id){
+	while(aux->process_id != process_id){ // Encontrar o Bloco do processo que vai ser desalocado
 		aux = aux->prox;
 	}
-	if(aux_ant == NULL){
-		if(aux_prox->ocupado == 0){
-			novo->espaco = aux_prox->espaco + aux->espaco;
+	if(aux_ant == NULL){// O bloco a ser desalocado e o primeiro da lista
+		if(aux_prox->ocupado == 0){ // O proximo bloco não esta com processo
+			novo->espaco = aux_prox->espaco + aux->espaco; // Soma dos espaços
 			aux->espaco = novo->espaco;
-			aux->ocupado = 0;
-			remover(&aux_prox, bloco_mem );
-			aux->process_id = -1;
+			aux->ocupado = 0; // Libera a ocupação do bloco
+			remover(&aux_prox, bloco_mem ); // Remove o proximo bloco, ja que os espaco foi juntado ao bloco desalocado
+			aux->process_id = -1; // o bloco agora é um bloco livre
 		}
-		else{
+		else{ // Caso o proximo esta ocupado
 			aux->ocupado = 0;
 			aux->process_id = -1;
 		}
 	}
 	else {
-		if(aux_prox == NULL){
-		 	if(aux_ant->ocupado == 0){
-				novo->espaco = aux_ant->espaco + aux->espaco;
+		if(aux_prox == NULL){ // O bloco a ser desalocado é o último
+		 	if(aux_ant->ocupado == 0){ // Bloco anterior esta livre
+				novo->espaco = aux_ant->espaco + aux->espaco; // Soma os espaços
 				aux->espaco = novo->espaco;
 				aux->ocupado = 0;
 				aux->process_id = -1;
-				remover(&aux_ant, bloco_mem);
+				remover(&aux_ant, bloco_mem); // Remove o bloco anterior, ja que os espaços foram juntados
 		 	}
-			else{
+			else{ // Caso o anterior esta ocupado
 				aux->ocupado = 0;
 				aux->process_id = -1;
 			}
 		}
-		else{
-			if(aux_prox->ocupado == 0 && aux_ant->ocupado == 1){
-			   novo->espaco = aux_prox->espaco + aux->espaco;
+		else{ // O bloco esta no meio da lista
+			if(aux_prox->ocupado == 0 && aux_ant->ocupado == 1){ // So o proximo bloco esta livre
+			   novo->espaco = aux_prox->espaco + aux->espaco; // Soma os espaços livres
 				aux->espaco = novo->espaco;
 				aux->ocupado = 0;
-				remover(&aux_prox, bloco_mem );
+				remover(&aux_prox, bloco_mem ); // Remove o proximo bloco, ja que os espacos foram somados
 				aux->process_id = -1;
 			}
 			else{
-				if(aux_prox->ocupado == 1 && aux_ant->ocupado == 0){
-					novo->espaco = aux_ant->espaco + aux->espaco;
+				if(aux_prox->ocupado == 1 && aux_ant->ocupado == 0){ // So o bloco anterior esta livre
+					novo->espaco = aux_ant->espaco + aux->espaco; // Soma os espaços livres
 					aux->espaco = novo->espaco;
 					aux->ocupado = 0;
 					aux->process_id = -1;
-					remover(&aux_ant, bloco_mem);
+					remover(&aux_ant, bloco_mem); // Remove o bloco anterior, ja que os espaços forma somados
 				}
 				else{
-					if(aux_prox->ocupado == 1 && aux_ant->ocupado == 1){
+					if(aux_prox->ocupado == 1 && aux_ant->ocupado == 1){ // Os dois espaços adjacentes estao ocupados
 						aux->ocupado = 0;
 						aux->process_id = -1;
 					}
-					else{	
-						novo->espaco = aux_ant->espaco + aux_prox->espaco + aux->espaco;
+					else{	// Os dois espaços adjacentes estao livres
+						novo->espaco = aux_ant->espaco + aux_prox->espaco + aux->espaco; // Soma os espacos livres
 						aux->espaco = novo->espaco;
 						aux->ocupado = 0;
 						aux->process_id = -1;
-						remover(&aux_ant, bloco_mem);
-						remover(&aux_prox, bloco_mem);
+						remover(&aux_ant, bloco_mem); // Remove o bloco anterior, ja que os espaços foram somados
+						remover(&aux_prox, bloco_mem); // Remove o proximo bloco, ja que os espaços foram somados
 					}
 				}
 			}
