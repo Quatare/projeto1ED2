@@ -1,0 +1,11 @@
+alocacao.c {
+  - alocaMem(): Função que verifica se existe espaço disponível para alocar
+    memória para o processo, existendo ele o faz;
+  - best_fit(): Função que verifica em qual local a nova alocação deve ocorrer,
+    retornando à alocaMem() o endereço da posição referente.
+}
+
+desalocacao.c {
+  - remover():
+  - desalocaMem():
+}

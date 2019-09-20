@@ -1,1 +1,3 @@
-
+Version_1_0 - Upload realizado por Yukiharu em 20/09/2019:
+  Adicionado arquivo clone do Version_0_4_1_Final.c para poder ser ajustado as
+    novas necessidades da etapa 2.
