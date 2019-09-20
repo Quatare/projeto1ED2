@@ -1,4 +1,4 @@
-void alocaMem(memoria **bloco, processo **lista_espera, int prioridade, int process_id, int tempo, char process_name[] int mem_solicitada) {
+int alocaMem(memoria **bloco, processo **lista_espera, int prioridade, int process_id, int tempo, char process_name[] int mem_solicitada) {
   memoria *melhor_local = NULL;
 
   // Obtenção do menor bloco de memória suficiente - Best Fit
@@ -23,9 +23,11 @@ void alocaMem(memoria **bloco, processo **lista_espera, int prioridade, int proc
       (melhor_local->ant)->prox = novo;
     }
     melhor_local->ant = novo;
+    return 1;
   } else { // Não há endereços válidos
     puts("Erro: Memoria insuficiente ou muito fragmentada! O processo será colocado na fila de espera");
     inserir(lista_espera, prioridade, process_id, tempo, 1, process_name, mem_solicitada);
+    return 0;
   }
 }
 
