@@ -1,0 +1,6 @@
+void remover(struct processo **lista){
+  struct processo *aux = NULL;
+  aux = *lista;
+  *lista = aux->prox;
+  free(aux);
+}
